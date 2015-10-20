@@ -5,6 +5,67 @@
 
 \section{Distributions and expected values}
 
+\begin{enumerate}
+
+\item[a)]
+
+Requirement for $p(x)$ to be probability density function (PDF):
+
+\begin{displaymath}
+\int_{-\infty}^{\infty} p(x) \, dx = 1
+\end{displaymath}
+
+Calculate antiderivative $P(x)$:
+
+\begin{displaymath}
+P(x) = \begin{cases}
+-c \cdot cos(x) + const.   & x \in [0, \pi]\\
+const.                      & else
+\end{cases}
+\end{displaymath}
+
+Choose $const.$ to be $0$.
+
+\begin{eqnarray*}
+1   &   = & \int_{-\infty}^\infty p(x) \, dx\\
+    &   = & \int_0^\pi p(x) \, dx\\
+    &   = & \Big[ P(x) \Big]_0^\pi\\
+    &   = & -c \cdot cos(\pi) + c \cdot cos(0)\\
+    &   = & 2c\\
+0.5 &   = & c
+\end{eqnarray*}
+
+\item[b)]
+
+Expected value of PDF $p(x)$:
+
+\begin{displaymath}
+\left\langle X \right\rangle_p = \int_{-\infty}^\infty x \cdot p(x) \, dx
+\end{displaymath}
+
+Calculate antiderivative $Q(x)$ of $x \cdot p(x)$:
+
+\begin{displaymath}
+Q(x) = \begin{cases}
+0.5 \, (sin(x) - x \cdot cos(x))    & x \in [0, \pi]\\
+const.                              & else
+\end{cases}
+\end{displaymath}
+
+Choose $const.$ to be $0$.
+
+\begin{eqnarray*}
+\left\langle X \right\rangle_p  &   = & \int_{-\infty}^\infty x \cdot p(x) \, dx\\
+                                &   = & \int_0^\pi x \cdot p(x) \, dx\\
+                                &   = & \Big[ Q(x) \Big]_0^\pi\\
+                                &   = & 0.5 \, (sin(\pi) - \pi \cdot cos(\pi)) - 0.5 \, (sin(0) - 0 \cdot cos(0))\\
+                                &   = & \frac{\pi}{2}
+\end{eqnarray*}
+
+\item[c)]
+
+\end{enumerate}
+
 \section{Marginal densities}
 
 \section{Taylor expansion}
