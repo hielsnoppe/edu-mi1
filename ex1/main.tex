@@ -1,5 +1,6 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage{amsmath}
+\usepackage[a4paper, top=1in, bottom=1.25in, left=0.75in, right=0.75in]{geometry}
 
 \begin{document}
 
@@ -69,6 +70,21 @@ Choose $const.$ to be $0$.
 \section{Marginal densities}
 
 \section{Taylor expansion}
+
+General form of the taylor series:
+
+\begin{displaymath}
+\sum_{n=0}^\infty \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n
+\end{displaymath}
+
+Calculate derivatives up to $n=3$:
+
+\begin{eqnarray*}
+f'(x)   &   = & \frac{1}{2 \, \sqrt{x + 1}}\\
+f''(x)  &   = & - \frac{1}{4 \, (x + 1)^\frac{3}{2}}\\
+f'''(x) &   = & \frac{3}{8 \, (x + 1)^\frac{5}{2}}\\
+        &   = & 1 + \frac{x}{2} + \frac{x^2}{8} + \frac{x^3}{16} + \ldots
+\end{eqnarray*}
 
 \section{Determinant of a matrix}
 
