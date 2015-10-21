@@ -218,16 +218,30 @@ P(D|-) &= 1 - P(\bar{D}|-) \approx 0.0005
 
 \begin{enumerate}[a)]
 
-\item
-
 \item \begin{itemize}
 
-\item
+\item In supervised learning we provide control labels to the machine during training, like a teacher would do. We can measure the performance by calculating the Error between targets and actual results.
 
-\item
+\item In unsupervised learning the machine has to learn without outside help, so its only inputs are the observations. This yields us the opportunity to discover hidden structures in our data.
 
-\item
+\item In reinforcement learning, additionally to providing the machine with observations like always, we give feedback to its classifications of our data (reinforcement signal, ranging anywhere between "good" and "bad"). We can measure the performance by calculating the cumulative reward.
 
+\end{itemize}
+
+\item \begin{itemize}
+\item To teach a (robot?) dog to catch a ball
+
+Reinforcement learning seems appropriate. As observations we would provide the trajectory of the ball. As feedback to the dog's movements we would provide the distance between dog and ball (lower is better), whether the dog has lifted the ball, and once he has, the distance between trainer and dog (lower is better).
+
+\item To read hand written addresses from letters
+
+Here we would employ reinforcement learning with a training phase, as we cannot train each persons handwriting to the machine right from the start. As observations one image per word seems appropriate. As feedback one could provide a combination of count of mistakes for some proof-read samples, and for each letter wether it could actually be delivered or not.
+
+If the user set was limited, providing huge amounts of handwritten address samples (again one image per word) with their manually digitized versions as control labels might suffice.
+
+\item identify groups of users with the same taste of music
+
+Here we would employ unsupervised learning to discover clusters in our data. As observations we could provide (pre-calculated) metadata of each user's music-collection, like user-id, bpm per track, genre-tags etc. .
 \end{itemize}
 
 \end{enumerate}
