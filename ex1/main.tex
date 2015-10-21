@@ -133,24 +133,58 @@ tr(A)   &   = & a_{11} + a_{22} + a_{33}\\
 
 \begin{enumerate}[a)]
 
-\item
+\item Check if $a=(0,0)$ is a critical point for $f$ and $g$.
 
-Requirement for $a$ to be a critical point of functions $f$ and $g$:
+Calculate Jabobimatrix (first derivatives):
 
-\begin{displaymath}
-f'(a) \in \{0, \, undef.\} \land g'(a) \in \{0, \, undef.\}
-\end{displaymath}
+\begin{align*}
+	Jf &= (2x, 2y) \\
+	Jg &= (2x, -2y)
+\end{align*} 
+A critical point requires all first derivatives to be zero:
+\begin{align*}
+	2x = 0 \Leftrightarrow x = 0 \\
+	2y = 0 \Leftrightarrow y = 0
+\end{align*} 
+This means $a = (0,0)$ is a critical point for $f$. Now we do the same for $g$:
+\begin{align*}
+	2x = 0 \Leftrightarrow x = 0 \\
+	-2y = 0 \Leftrightarrow y = 0
+\end{align*}
+We get that $a$ is a critical point for $g$, too.
 
-Calculate derivatives $f'(x)$ and $g'(x)$:
+\item Check if $a$ is an extremum.
 
-\begin{eqnarray*}
-0   &   = & f'(a)\\
-    &   = & \ldots\\
-0   &   = & g'(a)\\
-    &   = & \ldots
-\end{eqnarray*}
+Calculate Hessian matrix:
 
-\item
+\begin{align*}
+	Hf &= \left(\begin{array}{ccc}
+		2 & 0 \\
+		0 & 2
+		\end{array} \right) \\
+	Hg &= \left(\begin{array}{ccc}
+		2 & 0 \\
+		0 & -2
+		\end{array} \right) \\
+\end{align*}
+
+Now we calculate the Eigenvalues:
+\begin{align*}
+	det(Hf - \lambda I) = 0 
+	\Leftrightarrow det \left(\begin{array}{ccc} 2-\lambda & 0 \\ 0 & 2-\lambda \end{array} \right) = 0
+	\Leftrightarrow (2-\lambda)^2 = 0
+	\Leftrightarrow \lambda = 2
+\end{align*}
+All Eigenvalues are positive, so Hf is positive definite, which means $a$ is a minimum.
+
+For Hg we observe positive and negative Eigenvalues:
+\begin{align*}
+	det(Hg - \lambda I) = 0 
+	\Leftrightarrow det \left(\begin{array}{ccc} 2-\lambda & 0 \\ 0 & -2-\lambda \end{array} \right) = 0
+	\Leftrightarrow (2-\lambda)(-2-\lambda) = 0
+	\Leftrightarrow \lambda \in \{2,-2\}
+\end{align*}
+This means Hg is neither positive nor negative definite, so $a$ is not an extremum.
 
 \end{enumerate}
 
