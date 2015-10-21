@@ -68,14 +68,21 @@ Choose $const.$ to be $0$.
 
 \item
 
-\textbf{TODO:} This looks weird ... and it is incomplete.
+% TODO: This might not be correct.
 
 Calculate antiderivative $R(x)$ of $\left( x - \left\langle X \right\rangle_p \right)^2 \cdot p(x)$:
 
+\begin{eqnarray*}
+\left( x - \left\langle X \right\rangle_p \right)^2 \cdot p(x)
+&   = & \left( x - \frac{\pi}{2} \right)^2 \cdot \frac{1}{2} \cdot sin(x)\\
+&   = & \left( x^2 - \pi x + \frac{\pi^2}{4} \right) \cdot \frac{1}{2} \cdot sin(x)
+\end{eqnarray*}
+
 \begin{displaymath}
 R(x) = \begin{cases}
-(- 0.5 x^2 + 1.5708 x - 0.233701) \cdot cos(x) + (x - 1.5708) \cdot sin(x) + const. & x \in [0, \pi]\\
-const.                                                                              & else
+\frac{1}{2} \left( -x^2 + \pi x - \frac{1}{4} \, \pi^2 - 2 \right)
+\cdot cos(x) + \left( x - \frac{1}{2} \, \pi \right) \cdot sin(x) + const.      & x \in [0, \pi]\\
+const.                                                                          & else
 \end{cases}
 \end{displaymath}
 
@@ -84,9 +91,14 @@ Choose $const.$ to be $0$.
 \begin{eqnarray*}
 \left\langle X^2 \right\rangle_p - \left\langle X \right\rangle_p^2
 &   = & \int_{-\infty}^\infty \left( x - \left\langle X \right\rangle_p \right)^2 \cdot p(x) \, dx\\
-&   = & \int_0^\pi \left( x - \frac{\pi}{2} \right)^2 \cdot 0.5 \cdot sin(x) \, dx\\
+&   = & \int_0^\pi \left( x - \frac{\pi}{2} \right)^2 \cdot \frac{1}{2} \cdot sin(x) \, dx\\
 &   = & \Big[ R(x) \Big]_0^\pi\\
-&   = & -
+&   = & \frac{1}{2} \left( -\pi^2 + \pi^2 - \frac{1}{4} \pi^2 - 2 \right) \cdot cos(\pi)
+        + \left( \pi - \frac{1}{2} \pi \right) \cdot sin(\pi)
+        - \frac{1}{2} (-2) \cdot cos(0) - 0\\
+&   = & \frac{1}{8} \pi^2 + 1 + 1\\
+&   = & 2 + \frac{1}{8} \pi^2\\
+& \approx & 3.2337
 \end{eqnarray*}
 
 \end{enumerate}
@@ -107,7 +119,8 @@ Calculate derivatives up to $n=3$:
 f'(x)   &   = & \frac{1}{2 \, \sqrt{x + 1}}\\
 f''(x)  &   = & - \frac{1}{4 \, (x + 1)^\frac{3}{2}}\\
 f'''(x) &   = & \frac{3}{8 \, (x + 1)^\frac{5}{2}}\\
-        &   = & 1 + \frac{x}{2} + \frac{x^2}{8} + \frac{x^3}{16} + \ldots
+\sum_{n=0}^3 \frac{f^{(n)}(x_0)}{n!} (x - x_0)^n
+        &   = & 1 + \frac{x}{2} + \frac{x^2}{8} + \frac{x^3}{16}
 \end{eqnarray*}
 
 \subsection{Determinant of a matrix}
@@ -140,17 +153,22 @@ Calculate Jabobimatrix (first derivatives):
 \begin{align*}
 	Jf &= (2x, 2y) \\
 	Jg &= (2x, -2y)
-\end{align*} 
+\end{align*}
+
 A critical point requires all first derivatives to be zero:
+
 \begin{align*}
 	2x = 0 \Leftrightarrow x = 0 \\
 	2y = 0 \Leftrightarrow y = 0
-\end{align*} 
+\end{align*}
+
 This means $a = (0,0)$ is a critical point for $f$. Now we do the same for $g$:
+
 \begin{align*}
 	2x = 0 \Leftrightarrow x = 0 \\
 	-2y = 0 \Leftrightarrow y = 0
 \end{align*}
+
 We get that $a$ is a critical point for $g$, too.
 
 \item Check if $a$ is an extremum.
@@ -172,7 +190,7 @@ Obviously, $det(Hf(a)) \neq 0$ and $det(Hg(a)) \neq 0$.
 
 Now we calculate the Eigenvalues:
 \begin{align*}
-	det(Hf(a) - \lambda I) = 0 
+	det(Hf(a) - \lambda I) = 0
 	\Leftrightarrow det \left(\begin{array}{ccc} 2-\lambda & 0 \\ 0 & 2-\lambda \end{array} \right) = 0
 	\Leftrightarrow (2-\lambda)^2 = 0
 	\Leftrightarrow \lambda = 2
@@ -181,7 +199,7 @@ All Eigenvalues are positive, so $Hf(a)$ is positive definite, which means $a$ i
 
 For $Hg(a)$ we observe positive and negative Eigenvalues:
 \begin{align*}
-	det(Hg(a) - \lambda I) = 0 
+	det(Hg(a) - \lambda I) = 0
 	\Leftrightarrow det \left(\begin{array}{ccc} 2-\lambda & 0 \\ 0 & -2-\lambda \end{array} \right) = 0
 	\Leftrightarrow (2-\lambda)(-2-\lambda) = 0
 	\Leftrightarrow \lambda \in \{2,-2\}
