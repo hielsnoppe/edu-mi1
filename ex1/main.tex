@@ -191,6 +191,28 @@ This means Hg(a) is neither positive nor negative definite, so $a$ is not an ext
 \end{enumerate}
 
 \subsection{Bayes rule}
+From the description we get
+\begin{align*}
+	P(D) &= 0.01 \\
+	P(\bar{D}) &= 0.99 \\
+	P(+|D) &= 0.95 \\
+	P(-|D) &= 0.05 \\
+	P(+|\bar{D}) &= 0.001 \\
+	P(-|\bar{D}) &= 0.999
+\end{align*}
+
+from which we can calculate the remaining probabilities using Bayes rule:
+
+\begin{align*}
+P(D|+) &= \frac{P(+|D) P(D)}{P(+|D)P(D) + P(+|\bar{D})P(\bar{D})}
+	= \frac{0.95 \cdot 0.01}{0.95 \cdot 0.01 + 0.001 \cdot 0.99}
+	\approx 0.9056 \\
+P(\bar{D}|+) &= 1 - P(D|+) \approx 0.0944 \\
+P(\bar{D}|-) &= \frac{P(-|\bar{D})P(\bar{D})}{P(-|\bar{D})P(\bar{D}) + P(-|D)P(D)}
+	= \frac{0.999 \cdot 0.99}{0.999 \cdot 0.99 + 0.05 \cdot 0.01}
+	\approx 0.9995 \\
+P(D|-) &= 1 - P(\bar{D}|-) \approx 0.0005
+\end{align*}
 
 \subsection{Learning paradigms}
 
