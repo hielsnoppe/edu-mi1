@@ -30,6 +30,8 @@ plt.xticks([0.1, 1./3, 1, 10./3, 10],['0.1', '0.33333', '1', '3.3333', '10'])
 plt.savefig('folder/file.pdf')
 plt.plot(X[cross],Y[cross],'o',color='red',markersize=20,fillstyle='none')
 plt.rc('text',usetex=True)
+plt.axis('equal')  # preserve aspect ratio
+plt.xlim([180,0])  # reverse x-axis (assuming it was [0,180] before)
 
 if dict.has_key(k): return dict[k];
 dict[key] = value
