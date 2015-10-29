@@ -60,20 +60,18 @@ colors = ['red','green','yellow','blue']
 for i,color in enumerate(colors): ...
 
 DEBUGGING
-%debug  # start debugging after crash
-locals()  # dict of local variables
-p n  # evaluates and prints n
+import pdb  # required import
+pdb.set_trace()  # breakpoint
 globals()  # dict of global variables
 globals().keys()  # names of global variables
-ii in command mode  # interrupt execution if fct doesn't terminate
-%prun function(args)  # profiling
-import pdb
-pdb.set_trace()  # breakpoint
+locals()  # dict of local variables (inside function)
+p n  # evaluates and prints n
 s  # execute next line
 c  # continue execution until next breakpoint
+ii in command mode  # interrupt execution if fct doesn't terminate
+%debug  # start debugging after crash
+%prun function(args)  # profiling
 
-PROFILING
-%prun fun(args)
 
 broadcasting, x.T Zeilenvektor, v Spaltenvektor ((n,1)-Matrix)
 	x.T + v = x.T mit v elementweise zu einer Matrix durchmultipliziert
