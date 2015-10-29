@@ -18,6 +18,21 @@
 \begin{enumerate}[a)]
 \item
 
+As 3-layered networks with linear transfer functions are equivalent to a single connectionist neuron (p.13), non-linear transfer functions are required achieve the computational capabilities to approximate more complex functions or model more complex behaviour. Basically, we end up with only linear decision boundaries, which might not be sufficient to seperate our data points effectively.
+
+\item
+
+The bias serves as a threshold for the activity signal (p.12). Modifying the threshold moves the decision boundary while preserving it's slope.
+
+In figure 8 of the script (p.8) we see a working example with a bias. If we didn't have a bias, the decision boundary would pass through the origin, making it impossible to reliably distinguish apple-datapoints from orange-datapoints, regardless of it's slope.
+
+\item
+
+Point and edge filters (Sobel filters) are specific linear weights ($w$) for the input vector $x$, used for point and edge detection in images.
+
+\item
+
+The stochastic function has a negative slope at the inflection point and is not deterministic.
 
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
