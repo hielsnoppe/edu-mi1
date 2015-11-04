@@ -7,7 +7,7 @@ import random as rd
 nhid = 10
 x = np.arange(-2.0,2.0,0.05)
 y = np.zeros((50,len(x)))
-a_max = 0.5
+a_max = 2
 
 # loop for 50 MLP output calculations
 i = 0

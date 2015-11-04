@@ -14,6 +14,9 @@ x1 = x1[1:len(x1)]
 x2 = x2[1:len(x2)]
 y = y[1:len(y)]
 
+#### STEPSIZE FOR THETA ############
+stepsize = 0.01
+
 ################################################################################
 ### a) plot x1 & x2 in scatter plot
 plt.scatter(x1[y==0],x2[y==0],c='r',label='$y=0$')
@@ -69,7 +72,7 @@ ind_max = np.where(p == p.max())
 print 'best angle (theta = 0):', angle[ind_max]
 wfix = np.transpose([[w1[ind_max]],[w2[ind_max]]])
 
-theta = np.arange(-3,3,0.1)
+theta = np.arange(-3,3,stepsize)
 
 # simulate neuron
 n = 0
@@ -99,7 +102,7 @@ plt.show()
 # find best angle, [w1,w2]
 ind_max = np.where(p == p.max())
 print 'best theta (angle = 20 degrees):', theta[ind_max]
-print 'best prediction result:', p[ind_max]
+print 'best prediction p result:', p[ind_max]
 
 ################################################################################
 ### d) plot data points with color according to classification by found parameters
@@ -110,11 +113,7 @@ Rgb = np.zeros(len(x1))
 rGb = np.zeros(len(x2))
 rgB = 0.5*rightpred_best
 
-for i in range(len(x1)):
-    if rightpred_best[0,0,i] == 1:
-        plt.scatter(x1[i],x2[i],c='g')
-    else:
-        plt.scatter(x1[i],x2[i],c='r')
+# plot that shit
 plt.scatter(x1[rightpred_best[0,0,i]==1],x2[rightpred_best[0,0,i]==1],c='g',label='right predicted')
 plt.scatter(x1[rightpred_best[0,0,i]==0],x2[rightpred_best[0,0,i]==0],c='r',label='false predicted')
 
@@ -147,9 +146,8 @@ p = np.zeros((len(w1),len(theta)))
 while i<len(w1):
     while j<len(theta):
         p[i,j] = np.sum(rightpred[i,:,j])/len(y)*100
-        print p[i,j]
         j = j+1
     i = i+1
 
 ind_max = np.where(p == p.max())
-print p.max()
+print 'e) max(p):', p.max()
