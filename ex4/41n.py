@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import random as rd
 
 ######### CHOOSE TASKS ##########
-solve_a = 0
+solve_a = 1
 solve_b = 0
-solve_c = 1
+solve_c = 0
 #################################
 
 xa = np.matrix([-1.0,0.3,2]).T
