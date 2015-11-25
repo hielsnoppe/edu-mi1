@@ -1,0 +1,32 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, top=1in, bottom=1.25in, left=0.75in, right=0.75in]{geometry}
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[R]{Robert Schüle 319782, Christoph Ende 331655}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{6.3 c)}
+
+Since the variances of the input data distribution in a) is much higher and there is an overlap between the classes, the plot wouldn't be so structured, which means
+that there would be wrong class assignments especially around the point where $w^T\,\phi(x)$ becomes zero. If a linear classifier would be applied, the data structure
+would be more difficult to approximate which would result in even more false classifications.  
+
+\subsection*{6.4 Kullback-Leibler Distance}
+
+\begin{eqnarray}
+D_{KL}(p||q)\;=\; \sum_{x \in \chi} p(x)\,log \frac{p(x)}{q(x)} &\;=\;& \mathbf{E}_p \Big{[} log \frac{p(X)}{q(X)} \Big{]} \;\;\;\;\; \Big{|} \mbox{X is a random variable} \\
+&\;=\;& \mathbf{E}_p \Big{[} -log \frac{q(X)}{p(X)} \Big{]} \;\;\;\;\; \Big{|} \mbox{use Jensens Inequality}  \\
+&\;\geq \;& -log\; \mathbf{E}_p \Big{[} \frac{q(X)}{p(X)} \Big{]} \\
+&\;=\;& -log \sum_{x \in \chi}\;p(x)\, \frac{q(x)}{p(x)} \\
+&\;=\;& -log \sum_{x \in \chi}\; q(x) \\
+&\;=\;& -log\,1 \;=\; 0
+\end{eqnarray}
+
+
+
+\end{document}
