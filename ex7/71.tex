@@ -1,0 +1,33 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, top=1in, bottom=1.25in, left=0.75in, right=0.75in]{geometry}
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[R]{Robert Schüle 319782, Christoph Ende 331655}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{7.1 Linear Discriminant Analysis}
+
+The classification criterion for $c_1$ (or $\lnot c_2$) can be expressed as follows:
+
+\begin{eqnarray}
+p(c_1|x)\; &\;>\;&\; p(c_2|x)\;\;\;\;\;\;\;| \mbox{apply Bayes' rule}\\
+\frac{p(x|c_1) p(c_1)}{p(x)} &\;>\;& \frac{p(x|c_2) p(c_2)}{p(x)}\\
+\exp(\; -\frac{1}{2}(\vec{x}-\vec{\mu_1})^T \Sigma^{-1} (\vec{x}-\vec{\mu_1}))\;p(c_1) &\;>\;& \exp(\; -\frac{1}{2}(\vec{x}-\vec{\mu_2})^T \Sigma^{-1} (\vec{x}-\vec{\mu_2}) \;)\;p(c_2)\;\;\;\;\;| \mbox{log} \\
+ -\frac{1}{2}(\vec{x}-\vec{\mu_1})^T \Sigma^{-1} (\vec{x}-\vec{\mu_1})\; + \log{p(c_1)} &\; > \;& -\frac{1}{2}(\vec{x}-\vec{\mu_2})^T \Sigma^{-1} (\vec{x}-\vec{\mu_2}) \; + \log{p(c_2)} \\
+0 &\; > \;& \vec{x}^T \underbrace{\,\Sigma^{-1}(\vec{\mu_1}\;-\;\vec{\mu_2})\;}_{w} \underbrace{- \frac{1}{2}( \vec{\mu_1}^T \Sigma^{-1} \vec{\mu_1} - \vec{\mu_2}^T \Sigma^{-1} \vec{\mu_2}) + \log{\frac{p(c_1)}{p(c_2)}} }_{b}
+\end{eqnarray}
+\noindent
+The mathematical conversions lead to a linear equation in $\vec{x}$ where we can directly read the parameters $w$ and $b$.\\
+In case of unequal covariances we cannot eliminate the term in front of the exponential equation in $p(x|c_k)$ which would lead us to a nonlinear result and therefore would require a nonlinear connectionist neuron.
+The shape of the decision boundary would bend in the direction of the data, whose class has the smaller variance.
+
+
+
+
+
+\end{document}
