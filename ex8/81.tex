@@ -1,0 +1,104 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, top=1in, bottom=1.25in, left=0.75in, right=0.75in]{geometry}
+
+\begin{document}
+\pagestyle{fancy}
+\fancyhead[R]{Robert Schüle 319782, Christoph Ende 331655}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{8.1 Binomial Coefficients}
+
+\begin{eqnarray}C_{(p,N)}\;+\;C_{(p,N-1)}\;&=&\;C_{(p+1,N)} \\
+2 \sum_{k=0}^{N-1} {p-1 \choose k} \;+\; 2 \sum_{k=1}^{N-1} {p-1 \choose k-1} \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \;\;\;\Big{|}\mbox{\small{extend k range in $2^{nd}$ sum:}} {n \choose -1} = 0\; \forall\; n \in \mathbb{N} \\
+2 \sum_{k=0}^{N-1} {p-1 \choose k} \;+\; 2 \sum_{k=0}^{N-1} {p-1 \choose k-1}  \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \\
+2 \sum_{k=0}^{N-1}\Big{[} {p-1 \choose k} \;+\; {p-1 \choose k-1} \Big{]} \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \;\;\;\Big{|} \; \mbox{apply (2) from task sheet} \\
+2 \sum_{k=0}^{N-1} {p \choose k} \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \qed
+\end{eqnarray}
+\noindent
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{8.3 The primal SRM problem}
+\begin{enumerate}[a)]
+\item
+
+\item
+\begin{itemize}
+\item (N+1)-dimensional input space: $\underline{x}\;=\;[x_0,x_1,...,x_N]^T$
+\item we can set $b$ to zero, because it doesn't affect any distances resp. there exists a linear coordinate transformation for every possible $b$ so that $b$ becomes zero
+\item we will define 3 linear functions in the plane where $y=0$: $g_0$ describes the classification boundary $\{x\;|\;y=0\}$, $g_1$ describes the parallel line $\{x\;|\; y=1\}$ (it could also be $\{x\;| \; y=-1\}$, the symmetry allows us to consider only one case) and
+$g_p$ is the perpendicular line to the first two lines
+\item $g_1$ describest the nearest line to $g_0$ on which a training point is allowed to be located (since $y(\underline{x}^{(\alpha)})\geq1$)
+\begin{eqnarray}
+0\;=\;\underline{w}^T \underline{x}\;\rightarrow\; &g_0:& x_0\;=\;-\sum_{k=1}^N \frac{x_k w_k}{w_0}\\
+1\;=\;\underline{w}^T \underline{x}\;\rightarrow\; &g_1:& x_0\;=\;-\sum_{k=1}^N \frac{x_k w_k}{w_0}\;+\;\frac{1}{w_0}
+\end{eqnarray}
+\item the Euclidean distance of the intersections of $g_p$ with $g_0$ and $g_1$ desribes the lower bound we're looking for
+\item we obtain the perpendicular line by rotating any line which is parallel to $g_1$ and $g_0$ by $90^{\circ}$ (we choose the one, that goes through the point of origin)
+\item the rotation can be performed by negating the reciprocal of the original slope:
+\begin{eqnarray}
+g_p: x_0\;=\; \sum_{k=1}^N \frac{x_k w_0}{w_k}
+\end{eqnarray}
+
+\item in the next step, we calculate the intersections $P_{p0}$ and $P_{P1}$
+\item $x_k$-coordinate of $P_{p0}$:
+\begin{eqnarray}
+\sum_{k=1}^N \frac{x_k w_0}{w_k} \;=\; -\sum_{k=1}^N \frac{x_k w_k}{w_0}
+\end{eqnarray}
+\item this term becomes true for $x_k\;=\; 0$
+\item $x_0\;=\;0$ because $g_p(x_k=0)\;=\;0$ $\rightarrow P_{p0} = \vec{0}$
+
+\item $x_k$-coordinate of $P_{p1}$:
+\begin{eqnarray}
+\sum_{k=1}^N \frac{x_k w_0}{w_k} \;&=&\; -\sum_{k=1}^N \frac{x_k w_k}{w_0}\;+\;\frac{1}{w_0} \\
+\sum_{k=1}^N (\frac{w_0}{w_k}+\frac{w_k}{w_0})x_k \;&=&\; \frac{1}{w_0} \\
+\sum_{k=1}^N \frac{w_k^2 + w_0^2}{w_0 w_k}x_k \;&=&\; \frac{1}{w_0} \\
+x_k \;&=&\; \frac{1}{w_0}\frac{w_k w_0}{w_0^2\;+\;\sum_{k=1}^{N} w_k^2} \;=\; \frac{w_k}{\;\sum_{k=0}^{N} w_k^2}
+\end{eqnarray}
+\item $x_0$-coordinate of $P_{p1}$ by plugging $x_k$ in $g_p$:
+\begin{eqnarray}
+x_0\;=\; \sum_{k=1}^N \frac{w_0}{w_k} \frac{w_k}{\;\sum_{j=0}^{N} w_j^2} \;=\; \sum_{k=1}^N \frac{w_0}{\;\sum_{j=0}^{N} w_j^2} \;=\; \frac{w_0}{\;\sum_{j=0}^{N} w_j^2} \;=\; x_k\Big{|}_{k=0}
+\end{eqnarray}
+\item now we know the intersection points and are able to calculate the minimal distance between a training point $\underline{x}^{\alpha}$
+and the decision boundary:
+\begin{eqnarray}
+d(P_{p1},P_{p0}) = \sqrt{\sum_{k=0}^N (x_{k,P_{p1}})^2} = \sqrt{\sum_{k=0}^N \Big{(}\frac{w_k}{\sum_{j=0}^N w_j^2}\Big{)}^2} = \sqrt{ \frac{\sum_{k=0}^N w_k^2}{(\sum_{k=0}^N w_k^2)^2}} = \sqrt{ \frac{1}{\sum_{k=0}^N w_k^2}} = \frac{1}{\small{||}w\small{||}}
+\end{eqnarray}
+\item for the general case, $y(\underline{x}^{\alpha})\geq 1$ the calculated distance is a lower bound:
+\begin{eqnarray}
+d(\underline{x}^{\alpha},g_0)\;\geq\; \frac{1}{\small{||}w\small{||}}
+\end{eqnarray}
+
+\end{itemize}
+
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{8.5 Kernel Construction}
+\begin{enumerate}[a)]
+\item kernel matrix is symmetric:
+\begin{eqnarray}
+K(x,x')\;=\;\phi(x)^T\,\phi(x')\;=\;\phi(x')^T\,\phi(x)\;=\;K(x',x)
+\end{eqnarray}
+\item kernel matrix is positive semidefinite:
+\begin{eqnarray}
+a^T K a\;=\;\sum^P_{i,j=0} a_i a_j K_{ij}\;=\;\sum^P_{i,j=0}a_i a_j \langle \phi(x_i), \phi(x_j) \rangle \\
+= \langle\; \sum^P_{i=0}a_i \phi(x_i) \;,\; \sum^P_{j=0} a_j \phi(x_j)\;\rangle \;=\; || \sum_{i=0}^P a_i \phi(x_i) ||^2 \;\geq\;0
+\end{eqnarray}
+\item sum of two kernels is also a valid kernel:
+\begin{itemize}
+\item the sum of two symmetric matrices is (obviously) also symmetric and the sum of two positive semidefinite matrices is positive semidefinte as well:
+\end{itemize}
+\begin{eqnarray}
+a^T (K_1\;+\;K_2) a\;=\;a^T K_1 \,a\;+\;a^T K_2 \,a\;=\;c_1\;+\;c_2\;\geq\;0
+\end{eqnarray}
+\begin{itemize}
+\item this makes the sum of those matrices also a valid kernel, as mercer's theorem states
+\end{itemize}
+\end{enumerate}
+
+\end{document}

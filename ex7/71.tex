@@ -19,7 +19,7 @@ p(c_1|x)\; &\;>\;&\; p(c_2|x)\;\;\;\;\;\;\;| \mbox{apply Bayes' rule}\\
 \frac{p(x|c_1) p(c_1)}{p(x)} &\;>\;& \frac{p(x|c_2) p(c_2)}{p(x)}\\
 \exp(\; -\frac{1}{2}(\vec{x}-\vec{\mu_1})^T \Sigma^{-1} (\vec{x}-\vec{\mu_1}))\;p(c_1) &\;>\;& \exp(\; -\frac{1}{2}(\vec{x}-\vec{\mu_2})^T \Sigma^{-1} (\vec{x}-\vec{\mu_2}) \;)\;p(c_2)\;\;\;\;\;| \mbox{log} \\
  -\frac{1}{2}(\vec{x}-\vec{\mu_1})^T \Sigma^{-1} (\vec{x}-\vec{\mu_1})\; + \log{p(c_1)} &\; > \;& -\frac{1}{2}(\vec{x}-\vec{\mu_2})^T \Sigma^{-1} (\vec{x}-\vec{\mu_2}) \; + \log{p(c_2)} \\
-0 &\; > \;& \vec{x}^T \underbrace{\,\Sigma^{-1}(\vec{\mu_1}\;-\;\vec{\mu_2})\;}_{w} \underbrace{- \frac{1}{2}( \vec{\mu_1}^T \Sigma^{-1} \vec{\mu_1} - \vec{\mu_2}^T \Sigma^{-1} \vec{\mu_2}) + \log{\frac{p(c_1)}{p(c_2)}} }_{b}
+0 &\; < \;& \vec{x}^T \underbrace{\,\Sigma^{-1}(\vec{\mu_1}\;-\;\vec{\mu_2})\;}_{w} \underbrace{- \frac{1}{2}( \vec{\mu_1}^T \Sigma^{-1} \vec{\mu_1} - \vec{\mu_2}^T \Sigma^{-1} \vec{\mu_2}) + \log{\frac{p(c_1)}{p(c_2)}} }_{b}
 \end{eqnarray}
 \noindent
 The mathematical conversions lead to a linear equation in $\vec{x}$ where we can directly read the parameters $w$ and $b$.\\
