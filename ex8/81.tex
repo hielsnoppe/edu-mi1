@@ -5,6 +5,7 @@
 \usepackage{enumerate}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, top=1in, bottom=1.25in, left=0.75in, right=0.75in]{geometry}
 
@@ -18,64 +19,94 @@
 \begin{eqnarray}C_{(p,N)}\;+\;C_{(p,N-1)}\;&=&\;C_{(p+1,N)} \\
 2 \sum_{k=0}^{N-1} {p-1 \choose k} \;+\; 2 \sum_{k=1}^{N-1} {p-1 \choose k-1} \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \;\;\;\Big{|}\mbox{\small{extend k range in $2^{nd}$ sum:}} {n \choose -1} = 0\; \forall\; n \in \mathbb{N} \\
 2 \sum_{k=0}^{N-1} {p-1 \choose k} \;+\; 2 \sum_{k=0}^{N-1} {p-1 \choose k-1}  \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \\
-2 \sum_{k=0}^{N-1}\Big{[} {p-1 \choose k} \;+\; {p-1 \choose k-1} \Big{]} \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \;\;\;\Big{|} \; \mbox{apply (2) from task sheet} \\
-2 \sum_{k=0}^{N-1} {p \choose k} \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \qed
+2 \sum_{k=0}^{N-1}\Big{[} {p-1 \choose k} \;+\; {p-1 \choose k-1} \Big{]} \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k} \;\;\;\Big{|} \; \mbox{\small{apply (2) from task sheet}} \\
+2 \sum_{k=0}^{N-1} {p \choose k} \;&=&\; 2 \sum_{k=0}^{N-1} {p \choose k}_{\tiny{\qed}}
 \end{eqnarray}
 \noindent
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{8.2 Geometry of Linear Classification}
+\begin{enumerate}[a)]
+\item
+The decision boundary is a hyperplane defined by $(w^Tx - b = 0)$. $w$ decides the orientation,
+$b$ the offset from the origin. $w$ points in the direction of positive classification values $y(x)$ (\ref{820}).
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{820.png}
+    \caption{}
+	\label{820}
+\end{figure}
+\begin{itemize}
+\item the decision boundary is given by $\{x\;|\;y=0\}$
+\item this can be expressed as a linear function: $x_1 = \;-\frac{w_0}{w_1}x_0 \;-\; \frac{b}{w_1}$
+\item as one can see, the slope of the boundary is $\;-\frac{w_0}{w_1}$ and the offset is $\;-\frac{b}{w_1}$
+    \item figure \ref{821}: $w_0$ only affects the slope
+    \item figure \ref{822}: varying $w_1$ also results in different offsets
+    \item figure \ref{823}: increasing $b$ leads to a negative offset, scaled by $w_1$
+\end{itemize}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{821.png}
+    \caption{}
+	\label{821}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{822.png}
+    \caption{}
+	\label{822}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{823.png}
+    \caption{}
+	\label{823}
+\end{figure}
+
+\item
+A linear classifier divides the input space into two half-spaces. The \textit{shattering coefficient} $s_{halfspaces}(n)$ then is the largest number of subsets that can be formed by intersecting \textit{any} one input set $X$ of $n$ points using half-spaces. The highest possible shattering coefficient is $2^{n}$.
+
+$s_{H}(n) = \underset{X \subseteq \Omega \\ |X| = n}{max}\ |\{X \cap H_i \mid H_i \in H\}|$
+
+The \textit{VC-dimension} $d_{VC}$ provides an upper bound to the shattering coefficient: $ln(s(n)) \leq d_{VC}(1+ln\frac{p}{d_{VC}})$.
+It provides a measure of the capacity of the separation capabilities of the separator function class H. If we can find n points, that can be shattered by H (that is, H can separate all possible binary labelings of the points), then VC(H) = n. It is sufficient, that some such example of n points exists (fixed points, but H must shatter them for all possible labelings).
+
+Small VC-dimensions are often applicable for real life data, since close points will have same labels, so separator classes with low VC-dimensions (low complexity models) might actually be preferrable. For a linear classifier in 2 input dimensions, the VC-dimension is 2.
+Correct linear classification is possible, if all classes can be bounded by non-overlapping convex domains.
+
+\end{enumerate}
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{8.3 The primal SRM problem}
 \begin{enumerate}[a)]
 \item
-
+The margin is the lowest distance between the decision boundary and the closest datapoints. The margin of a canonical hyperplane is set to be $d = \frac{1}{|w|}$ by choosing $|w|$ appropriately.
+A low margin means higher model complexity $C$, which means we might get a worse upper bound for the generalization error $E^G < E^T + C$, even if the separate the training set perfectly (overfitting).
+A high margin reduces model complexity, but increases the training error (underfitting).
 \item
-\begin{itemize}
-\item (N+1)-dimensional input space: $\underline{x}\;=\;[x_0,x_1,...,x_N]^T$
-\item we can set $b$ to zero, because it doesn't affect any distances resp. there exists a linear coordinate transformation for every possible $b$ so that $b$ becomes zero
-\item we will define 3 linear functions in the plane where $y=0$: $g_0$ describes the classification boundary $\{x\;|\;y=0\}$, $g_1$ describes the parallel line $\{x\;|\; y=1\}$ (it could also be $\{x\;| \; y=-1\}$, the symmetry allows us to consider only one case) and
-$g_p$ is the perpendicular line to the first two lines
-\item $g_1$ describest the nearest line to $g_0$ on which a training point is allowed to be located (since $y(\underline{x}^{(\alpha)})\geq1$)
-\begin{eqnarray}
-0\;=\;\underline{w}^T \underline{x}\;\rightarrow\; &g_0:& x_0\;=\;-\sum_{k=1}^N \frac{x_k w_k}{w_0}\\
-1\;=\;\underline{w}^T \underline{x}\;\rightarrow\; &g_1:& x_0\;=\;-\sum_{k=1}^N \frac{x_k w_k}{w_0}\;+\;\frac{1}{w_0}
-\end{eqnarray}
-\item the Euclidean distance of the intersections of $g_p$ with $g_0$ and $g_1$ desribes the lower bound we're looking for
-\item we obtain the perpendicular line by rotating any line which is parallel to $g_1$ and $g_0$ by $90^{\circ}$ (we choose the one, that goes through the point of origin)
-\item the rotation can be performed by negating the reciprocal of the original slope:
-\begin{eqnarray}
-g_p: x_0\;=\; \sum_{k=1}^N \frac{x_k w_0}{w_k}
-\end{eqnarray}
+\input{83b}
+\item
+Primal Problem:
 
-\item in the next step, we calculate the intersections $P_{p0}$ and $P_{P1}$
-\item $x_k$-coordinate of $P_{p0}$:
-\begin{eqnarray}
-\sum_{k=1}^N \frac{x_k w_0}{w_k} \;=\; -\sum_{k=1}^N \frac{x_k w_k}{w_0}
-\end{eqnarray}
-\item this term becomes true for $x_k\;=\; 0$
-\item $x_0\;=\;0$ because $g_p(x_k=0)\;=\;0$ $\rightarrow P_{p0} = \vec{0}$
+minimize $f_{0}(x)$ subject to $f_{k}(x) \leq 0$, $k=1,...,m$, which in our case is:
 
-\item $x_k$-coordinate of $P_{p1}$:
-\begin{eqnarray}
-\sum_{k=1}^N \frac{x_k w_0}{w_k} \;&=&\; -\sum_{k=1}^N \frac{x_k w_k}{w_0}\;+\;\frac{1}{w_0} \\
-\sum_{k=1}^N (\frac{w_0}{w_k}+\frac{w_k}{w_0})x_k \;&=&\; \frac{1}{w_0} \\
-\sum_{k=1}^N \frac{w_k^2 + w_0^2}{w_0 w_k}x_k \;&=&\; \frac{1}{w_0} \\
-x_k \;&=&\; \frac{1}{w_0}\frac{w_k w_0}{w_0^2\;+\;\sum_{k=1}^{N} w_k^2} \;=\; \frac{w_k}{\;\sum_{k=0}^{N} w_k^2}
-\end{eqnarray}
-\item $x_0$-coordinate of $P_{p1}$ by plugging $x_k$ in $g_p$:
-\begin{eqnarray}
-x_0\;=\; \sum_{k=1}^N \frac{w_0}{w_k} \frac{w_k}{\;\sum_{j=0}^{N} w_j^2} \;=\; \sum_{k=1}^N \frac{w_0}{\;\sum_{j=0}^{N} w_j^2} \;=\; \frac{w_0}{\;\sum_{j=0}^{N} w_j^2} \;=\; x_k\Big{|}_{k=0}
-\end{eqnarray}
-\item now we know the intersection points and are able to calculate the minimal distance between a training point $\underline{x}^{\alpha}$
-and the decision boundary:
-\begin{eqnarray}
-d(P_{p1},P_{p0}) = \sqrt{\sum_{k=0}^N (x_{k,P_{p1}})^2} = \sqrt{\sum_{k=0}^N \Big{(}\frac{w_k}{\sum_{j=0}^N w_j^2}\Big{)}^2} = \sqrt{ \frac{\sum_{k=0}^N w_k^2}{(\sum_{k=0}^N w_k^2)^2}} = \sqrt{ \frac{1}{\sum_{k=0}^N w_k^2}} = \frac{1}{\small{||}w\small{||}}
-\end{eqnarray}
-\item for the general case, $y(\underline{x}^{\alpha})\geq 1$ the calculated distance is a lower bound:
-\begin{eqnarray}
-d(\underline{x}^{\alpha},g_0)\;\geq\; \frac{1}{\small{||}w\small{||}}
-\end{eqnarray}
+minimize $\frac{1}{2}|w|^2$ subject to $-y_T^{(\alpha)}((w^Tx^{(\alpha)}+b)-1) \leq 0$
 
-\end{itemize}
+This means we wish to find the largest margin $\frac{1}{|w|}$, that seperates all training datapoints:
+
+$y_T^{(\alpha)}(w^Tx^{(\alpha)} + b) \geq 1 \quad \forall \alpha$
+
+holds for
+$y_T^{(\alpha)} \in \{-1, 1\}, \quad \forall \alpha$ and
+
+$ w^Tx^{(\alpha)} + b \geq y_T^{(\alpha)} \quad \forall y_T^{(\alpha)} = 1$,
+
+$ w^Tx^{(\alpha)} + b \leq y_T^{(\alpha)} \quad \forall y_T^{(\alpha)} = -1$
+
+The constraint term at the top is just a concise rewrite of these 2 inequalities.
+
+Since the objective function $\frac{1}{2}|w|^2$ is convex, it only has one optimal solution. And since this is a standard formulation, we can use solvers to solve it.
+The solution should classify all training points perfectly ($E^T = 0$), while minimizing the complexity $C$.
 
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -98,7 +129,7 @@ a^T K a\;=\;\sum^P_{i,j=0} a_i a_j K_{ij}\;=\;\sum^P_{i,j=0}a_i a_j \langle \phi
 a^T (K_1\;+\;K_2) a\;=\;a^T K_1 \,a\;+\;a^T K_2 \,a\;=\;c_1\;+\;c_2\;\geq\;0
 \end{eqnarray}
 \begin{itemize}
-\item this makes the sum of those matrices also a valid kernel, as mercer's theorem states
+\item this makes the sum of those matrices also a valid kernel, as Mercer's theorem states (Haykin - \textit{"Neural Networks - A Comprehensive Foundation"},$\;2^{\mbox{\tiny{nd}}}$ Ed., p. 331)
 \end{itemize}
 \end{enumerate}
 
