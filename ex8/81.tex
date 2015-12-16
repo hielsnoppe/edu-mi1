@@ -6,6 +6,7 @@
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{caption}
 \usepackage[utf8]{inputenc}
 \usepackage[a4paper, top=1in, bottom=1.25in, left=0.75in, right=0.75in]{geometry}
 
@@ -28,8 +29,8 @@
 \subsection*{8.2 Geometry of Linear Classification}
 \begin{enumerate}[a)]
 \item
-The decision boundary is a hyperplane defined by $(w^Tx - b = 0)$. $w$ decides the orientation,
-$b$ the offset from the origin. $w$ points in the direction of positive classification values $y(x)$ (\ref{820}).
+The decision boundary is a hyperplane defined by $(w^Tx + b = 0)$. $w$ decides the orientation,
+$b$ decides the offset from the origin. $w$ points in the direction of positive classification values $y(x)$. (Figure \ref{820})
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.6\textwidth]{820.png}
@@ -37,8 +38,8 @@ $b$ the offset from the origin. $w$ points in the direction of positive classifi
 	\label{820}
 \end{figure}
 \begin{itemize}
-\item the decision boundary is given by $\{x\;|\;y=0\}$
-\item this can be expressed as a linear function: $x_1 = \;-\frac{w_0}{w_1}x_0 \;-\; \frac{b}{w_1}$
+\item the decision boundary is given by $\{x\;|\;w^Tx + b=0\}$
+\item in the 2-dimensional case this can be expressed as: $x_1 = \;-\frac{w_0}{w_1}x_0 \;-\; \frac{b}{w_1}$
 \item as one can see, the slope of the boundary is $\;-\frac{w_0}{w_1}$ and the offset is $\;-\frac{b}{w_1}$
     \item figure \ref{821}: $w_0$ only affects the slope
     \item figure \ref{822}: varying $w_1$ also results in different offsets
@@ -66,12 +67,14 @@ $b$ the offset from the origin. $w$ points in the direction of positive classifi
 \item
 A linear classifier divides the input space into two half-spaces. The \textit{shattering coefficient} $s_{halfspaces}(n)$ then is the largest number of subsets that can be formed by intersecting \textit{any} one input set $X$ of $n$ points using half-spaces. The highest possible shattering coefficient is $2^{n}$.
 
-$s_{H}(n) = \underset{X \subseteq \Omega \\ |X| = n}{max}\ |\{X \cap H_i \mid H_i \in H\}|$
+$s_{H}(n) = \underset{X \subseteq \Omega, |X| = n}{max}\ |\{X \cap H_i \mid H_i \in H\}|$
 
-The \textit{VC-dimension} $d_{VC}$ provides an upper bound to the shattering coefficient: $ln(s(n)) \leq d_{VC}(1+ln\frac{p}{d_{VC}})$.
+Similarly, the VC dimension can be interpreted as the largest number of data points, that can be separated in all possible ways by the functions contained in the space H (Rychetsky (2001), p.15-16).
 It provides a measure of the capacity of the separation capabilities of the separator function class H. If we can find n points, that can be shattered by H (that is, H can separate all possible binary labelings of the points), then VC(H) = n. It is sufficient, that some such example of n points exists (fixed points, but H must shatter them for all possible labelings).
 
-Small VC-dimensions are often applicable for real life data, since close points will have same labels, so separator classes with low VC-dimensions (low complexity models) might actually be preferrable. For a linear classifier in 2 input dimensions, the VC-dimension is 2.
+For a linear classifier in 2 input dimensions, the VC-dimension is 2 (it cannot cannot shatter 3 points, which lie on a line). 
+
+Small VC-dimensions are often applicable for real life data, since close points will have same labels, so separator classes with low VC-dimensions (low complexity models) might actually be preferrable.
 Correct linear classification is possible, if all classes can be bounded by non-overlapping convex domains.
 
 \end{enumerate}
