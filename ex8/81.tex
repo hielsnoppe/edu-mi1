@@ -70,7 +70,7 @@ A linear classifier divides the input space into two half-spaces. The \textit{sh
 $s_{H}(n) = \underset{X \subseteq \Omega, |X| = n}{max}\ |\{X \cap H_i \mid H_i \in H\}|$
 
 Similarly, the VC dimension can be interpreted as the largest number of data points, that can be separated in all possible ways by the functions contained in the space H (Rychetsky (2001), p.15-16).
-It provides a measure of the capacity of the separation capabilities of the separator function class H. If we can find n points, that can be shattered by H (that is, H can separate all possible binary labelings of the points), then VC(H) = n. It is sufficient, that some such example of n points exists (fixed points, but H must shatter them for all possible labelings).
+It provides a measure of the capacity of the separation capabilities of the separator function class H. If we can find n points, that can be shattered by H (that is, H can separate all possible binary labelings of the points), then VC(H) = n. It is sufficient, that some such example of n points exists (fixed points, but H must shatter them for all possible labelings). It factors into the complexity term and thus into the upper bound of the generalization error (see formula 2.22 in the script). It is itself upper bounded by $min(\frac{R^2}{d_w^2}, N) + 1$, where N is the dimensionality of the input space, R is the radius of the smallest sphere containing the input vectors, and $d_w$ is the margin of the decision boundary.
 
 For a linear classifier in 2 input dimensions, the VC-dimension is 2 (it cannot cannot shatter 3 points, which lie on a line). 
 
@@ -94,6 +94,7 @@ Primal Problem:
 minimize $f_{0}(x)$ subject to $f_{k}(x) \leq 0$, $k=1,...,m$, which in our case is:
 
 minimize $\frac{1}{2}|w|^2$ subject to $-y_T^{(\alpha)}((w^Tx^{(\alpha)}+b)-1) \leq 0$
+with variables: $w, b$
 
 This means we wish to find the largest margin $\frac{1}{|w|}$, that seperates all training datapoints:
 
@@ -109,9 +110,29 @@ $ w^Tx^{(\alpha)} + b \leq y_T^{(\alpha)} \quad \forall y_T^{(\alpha)} = -1$
 The constraint term at the top is just a concise rewrite of these 2 inequalities.
 
 Since the objective function $\frac{1}{2}|w|^2$ is convex, it only has one optimal solution. And since this is a standard formulation, we can use solvers to solve it.
-The solution should classify all training points perfectly ($E^T = 0$), while minimizing the complexity $C$.
+%The solution should classify all training points perfectly ($E^T = 0$), while minimizing the complexity $C$.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{8.4 The dual problem for the Support Vector Machine}
+\begin{enumerate}[a)]
+\item
+If we have a constrained optimization problem, where we maximize $f(x)$ s.t. $g(x)=0$, we can observe that in the maximum point $\nabla g$ and $\nabla f$ are parallel. This means we can introduce {\em Lagrangian multipliers} $\lambda$ with $\nabla g = \lambda \nabla f$ or $L = f(x) + \lambda g(x), \nabla L = 0$ and solve the resulting equations to find the maximum point.
+
+ Furthermore, if the Lagrangian has a saddle point, the optimal solution to the primal and dual problem is the same, so we can solve the primal by solving the dual problem (script equation 2.29, p.59).
+
+% $\lambda=0$ will be chosen, if $y_T^{(\alpha)}(w^Tx^{(\alpha)} + b) > 1$, i.e. it would have been subtracted from $\frac{1}{2}|w|^2$ in the objective function, which is undesirable for the solver.
+
+% The only case, where $\lambda\geq 0$ would be chosen, is if the corresponding $y_T^{(\alpha)}(w^Tx^{(\alpha)} + b) = 1$, so $y_T^{(\alpha)}(w^Tx^{(\alpha)} + b) - 1 = 0$, i.e. it doesn't lower the value of the objective function.
+
+Only all the closest vectors with the same distance to the decision boundary will have corresponding $\lambda^{(\alpha)} \not= 0$, since for these vectors the constraints will be satisfied with equality, because we're maximizing the margin $\frac{2}{|w|}$.
+
+\item
+(script ("lecture notes") equations 2.30 - 2.33ff, p.59-60)
 
 \end{enumerate}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{8.5 Kernel Construction}
 \begin{enumerate}[a)]
