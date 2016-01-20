@@ -57,6 +57,11 @@
 
 \end{enumerate}
 
+\begin{eqnarray}
+	P(B\,=\,t)\;&=&\;0.01			\\
+	P(B=t|A=t,E=t)\;&=&\;
+\end{eqnarray}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{10.3 Construction of a DAG}
@@ -77,9 +82,11 @@
 \item
 
 		\begin{itemize}
-			\item explaining away means that two statistically independent random variables can become statistically dependent by observing a common child
-			\item
-			\item
+			\item explaining away means that two conditionally independent random variables become conditionally dependent by observing a common child
+			\item in the DAG above, the events \textit{Burglary} and \textit{Earthquake} become conditionally dependent by observing \textit{Alarm}, e.g. if \textit{Earthquake} and \textit{Alarm}
+			both become true, the probability of \textit{Burglary} is lower than originally, because the alarm might be caused by the earthquake
+			\item another example for \textit{explaining away} is the situation of a quick test for amphetamine use: we asume the usage of amphetamine ($Am$) and the usage of aspirin ($As$) to be statistically independent
+			but we know that both substances can cause a positive test result ($T$). If a person took aspirin ($As=t$), a positive test result ($T=t$) might be caused by this substance with a high probability which makes it unreasonable to believe that the tested person took illegal amphetamine derivates.
 		\end{itemize}
 
 
