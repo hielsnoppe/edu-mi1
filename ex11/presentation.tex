@@ -84,15 +84,14 @@ Machine Intelligence I
 \end{eqnarray}
 \column{3.5cm}
 \begin{eqnarray}
-&C_4:& G,H,I \nonumber\\
-&C_5:& C,H,I \nonumber\\
-&C_6:& A,C,H \nonumber
+&C_4:& G,H,I,C \nonumber\\
+&C_6:& A,C,H \nonumber\\
+&C_7:& B,C,D \nonumber
 \end{eqnarray}
 \column{3.5cm}
 \begin{eqnarray}
-&C_7:& B,C,D \nonumber\\
 &C_8:& A,E \nonumber\\
-&C_9:& C,G \nonumber
+&C_9:& B,C,G \nonumber
 \end{eqnarray}
 \end{columns}
 \end{frame}
@@ -139,13 +138,14 @@ P(a,b,c,d,e) \;=\; P(a)P(b)P(c|a,b)P(d|c)P(e|c) \\
   \frametitle{a) potential functions and the clique-marginal representation}
 
 \begin{itemize}
-\item used to represent joint probabilities of cliques
+\item potential functions are used to represent joint probabilities of cliques, can be easily updated by new data
 \item potential functions are strictly positive, real-valued and only depend on random variables in their assigned clique
 \item don't need to be normalised so that $\psi_n(C_n) = \alpha\,P(C_n),\;\alpha>0$
 \item link between joint probability distribution and clique-marginal representation:
 \begin{equation}
 P(V \in \mathcal{V})\;=\;\prod_{V \in \mathcal{V}} P(V|V_{pa(V)})\;=\;\frac{\prod_i P(C_i)}{\prod_j P(S_j)}\;=\; \alpha \frac{\prod_i \psi_i(C_i)}{\prod_j \psi_j(S_j)}
 \end{equation}
+\item at the beginning, all potentials are chosen to be 1
 \end{itemize}
 
 
@@ -153,12 +153,23 @@ P(V \in \mathcal{V})\;=\;\prod_{V \in \mathcal{V}} P(V|V_{pa(V)})\;=\;\frac{\pro
 %++++++++++++++++++++++++++++++++++++++++
 \begin{frame}
   \frametitle{b) exploitation of potential functions to make inferences}
-
+\begin{enumerate}
+\item update clique potential
 \begin{itemize}
-\item
+  \item inference by observed evidence at one node: $V_l=v_l$
+  \item introduce indicator function $E(V_l) = \begin{cases}
+                                                  1 &\text{se $V_l = v_l$}\\
+                                                  0 &\text{se else}
+                                                  \end{cases}$
+  \item update clique potential of observed node: $\psi_{i,new}(C_i)=\psi_{i}(C_i)E(V_l)$
 \end{itemize}
-
-
+\item message passing
+\begin{itemize}
+  \item new seperator potential: $ \psi_c^*(S_c)\;=\; \sum_{V \in C_i, V \notin \psi_c} \psi_i(V \in C_i) $
+  \item the update of one clique demands updates of the neighbor cliques which happens by passing the update ratio $\frac{\psi_c^*(S_c)}{\psi_c(S_c)}$ ($S_c$: common seperator)
+  \item updated neighbor potential obtained by multiplication of current potential with the update rate
+\end{itemize}
+\end{enumerate}
 \end{frame}
 %++++++++++++++++++++++++++++++++++++++++
 \begin{frame}
@@ -166,7 +177,7 @@ P(V \in \mathcal{V})\;=\;\prod_{V \in \mathcal{V}} P(V|V_{pa(V)})\;=\;\frac{\pro
 
 \begin{itemize}
 \item simpler and clearer models due to substitution of subgraphs by cliques
-\item much better representation for inference
+\item highly improved interference
 \end{itemize}
 
 
